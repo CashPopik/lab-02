@@ -7,6 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,6 +15,7 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -24,6 +26,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -119,8 +122,24 @@ fun CityListScreen(
                 Text("Remove City")
             }
         }
+        LazyColumn(modifier = modifier.fillMaxHeight(0.9f)) {
+            items(cities) { city ->
+                Button(
+                    onClick = {
+                        newCityName = city
+                    },
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(horizontal = 18.dp, vertical = 12.dp),
+                ){
+                    Text(
+                        text = city,
+                        fontSize = 28.sp
+                    )}
+            }
+        }
         if (showAdd) {
-            Row(modifier = Modifier.padding(16.dp)) {
+            Row(modifier = Modifier.padding(8.dp)) {
                 OutlinedTextField(
                     value = newCityName,
                     onValueChange = { newCityName = it },
@@ -142,21 +161,8 @@ fun CityListScreen(
                     Text("Confirm")
                 }
             }
-        }
-        LazyColumn(modifier = modifier.fillMaxSize()) {
-            items(cities) { city ->
-                Button(
-                    onClick = {
-                        newCityName = city
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 18.dp, vertical = 12.dp)
-                ){
-                    Text(
-                        text = city,
-                        fontSize = 28.sp
-                    )}
+        }else{
+            Row(modifier = Modifier.padding(48.dp)) {
             }
         }
     }
