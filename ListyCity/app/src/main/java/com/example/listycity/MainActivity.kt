@@ -126,7 +126,7 @@ fun CityListScreen(
             items(cities) { city ->
                 Button(
                     onClick = {
-                        newCityName = city
+                        selectedCity = city
                     },
                     modifier = Modifier
                         .fillMaxWidth()
